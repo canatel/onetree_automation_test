@@ -1,0 +1,8 @@
+{
+  "system": {
+    "target_host": "<TARGET_HOST_URL>",
+    "platform": "windows",
+    "browser": "chrome",
+    "browser_extra_args": []
+  }
+}
