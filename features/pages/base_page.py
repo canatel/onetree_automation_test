@@ -93,23 +93,6 @@ class BasePage:
         except TimeoutException:
             return False
 
-    def wait_for_element_displayed(self, locator: Locator):
-        """Wait until an element is displayed.
-
-        If it isn't then raises an assertion error.
-
-        Parameters
-        ----------
-        locator : Locator
-            Locator tuple of two values (By, Value)
-
-        """
-        try:
-            self.wait.until(ec.visibility_of_element_located(locator))
-            assert True
-        except TimeoutException:
-            assert False, f"The element: {locator} isn't displayed"
-
     def scroll_to_element_by_coordinates(self, element: WebElement):
         """Scroll browser window to specified element coordinates.
 
@@ -137,79 +120,3 @@ class BasePage:
             self.driver.execute_script("arguments[0].click()", element)
         except ElementNotInteractableException:
             self.driver.execute_script("arguments[0].click()", element)
-
-    def get_value_attribute(self, *strategy: str) -> str:
-        """Find an element and returns the 'value' attribute.
-
-        Parameters
-        ----------
-        *strategy Tuple:
-            Unpacked locator tuple of two elements (By, Value)
-
-        Returns
-        -------
-        str
-            Element's Value attribute
-
-        """
-        element = self.find_element(*strategy)
-        return element.get_attribute("value")
-
-    def clear_input(self, element: Union[WebElement, Locator]):
-        """Find an input element and clears it.
-
-        Finds the input and clears it pressing the virtual keyboard
-        backspace key.
-
-        Parameters
-        ----------
-        element: WebElement
-            Python input DOM representation.
-
-        """
-        if isinstance(element, Locator):
-            element = self.find_element(*element)
-
-        element.send_keys(Keys.CONTROL + "a")
-        element.send_keys(Keys.DELETE)
-
-    def get_element_text(self, *strategy: str) -> str:
-        """Find an element and returns it's text property.
-
-        Parameters
-        ----------
-        *strategy: Tuple
-            Unpacked locator tuple of two element (By, Value)
-
-        Returns
-        -------
-        str:
-            Found element text property
-
-        """
-        element = self.find_element(*strategy)
-        return element.text
-
-    def is_element_disabled(self, *strategy: str) -> str:
-        """Find a web element and validate if it's disabled.
-
-        Returns
-        -------
-        str
-            WebElement disabled attribute
-
-        """
-        element = self.find_element(*strategy)
-        return element.get_attribute("disabled")
-
-    def is_element_enabled(self, *strategy: str) -> str:
-        """Find a web element and validate if it's enabled.
-
-        Returns
-        -------
-        str
-            WebElement enabled attribute
-
-        """
-        element = self.find_element(*strategy)
-        return element.get_attribute("enabled")

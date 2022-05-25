@@ -62,18 +62,6 @@ class LoginPage(BasePage):
     def is_login_button_displayed(self):
         return self.is_element_displayed(self.LOGIN_BUTTON)
 
-    def is_login_button_disabled(self):
-        return self.is_element_disabled(*self.LOGIN_BUTTON)
-
-    def get_username_text(self):
-        return self.get_element_text(*self.USERNAME_INPUT)
-
-    def get_password_text(self):
-        return self.get_element_text(*self.PASSWORD_INPUT)
-
-    def get_username_0_text(self):
-        return self.get_element_text(*self.USERNAME_INPUT_0)
-
     def login(self, username, password):
         username_input = self.find_element(*self.USERNAME_INPUT)
         username_0_input = self.find_element(*self.USERNAME_INPUT_0)
