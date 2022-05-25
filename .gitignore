@@ -1,0 +1,5 @@
+Pipfile.lock
+*.json
+logfile.*
+failed_scenarios_screenshots/
+allure/
